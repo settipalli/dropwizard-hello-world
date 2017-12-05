@@ -1,5 +1,6 @@
 package com.dp;
 
+import com.dp.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -23,7 +24,11 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void run(final HelloWorldConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        final HelloWorldResource resource = new HelloWorldResource(
+                configuration.getTemplate(),
+                configuration.getDefaultName()
+        );
+        // environment is a registry of all the things your application can do.
+        environment.jersey().register(resource);
     }
-
 }
