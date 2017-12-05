@@ -1,5 +1,6 @@
 package com.dp;
 
+import com.dp.health.TemplateHealthCheck;
 import com.dp.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -28,7 +29,10 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
+        final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
+
         // environment is a registry of all the things your application can do.
+        environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
     }
 }
