@@ -24,6 +24,10 @@ hs_err_pid*
 # maven target folder
 target/
 
+# The pom.xml file produced by the maven-shade-plugin that does not include dependencies for
+# the libraries whose contents are included in the fat jar.
+dependency-reduced-pom.xml
+
 # IDE
 .idea
 .vscode
